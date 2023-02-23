@@ -2,6 +2,8 @@
 
 ## How to build, install, and test
 
+**Everything below needs to be performed on a linux environment, i.e. linux virtualbox**
+
 1. Open a terminal and cd into the directory of this project.
     
 2. Execute the following commands:
