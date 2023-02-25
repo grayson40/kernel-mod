@@ -125,6 +125,8 @@ static int close(struct inode *inodep, struct file *filep)
 
 /*
  * Reads from device, displays in userspace, and deletes the read data
+ * If not enough data is available to service a read request, the driver must respond with only the amount available 
+ * Including 0 bytes
  */
 static ssize_t read(struct file *filep, char *buffer, size_t len, loff_t *offset)
 {
@@ -146,6 +148,7 @@ static ssize_t read(struct file *filep, char *buffer, size_t len, loff_t *offset
 
 /*
  * Writes to the device
+ * If not enough buffer is available to store a write request, the driver must store only up to the amount available
  */
 static ssize_t write(struct file *filep, const char *buffer, size_t len, loff_t *offset)
 {
