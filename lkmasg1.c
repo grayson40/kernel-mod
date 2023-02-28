@@ -136,12 +136,12 @@ static ssize_t read(struct file *filep, char *buffer, size_t len, loff_t *offset
 	printk(KERN_INFO, "lkmasg1: error = %d\n", error);
 	if (error == 0)
 	{
-		printk(KERN_INFO, "lkmasg1: read [%s].\n", message);
+		printk(KERN_INFO "lkmasg1: reading [%s].\n", message);
 		return(sizeOfMessage=0);
 	}
 	else
 	{
-		printk(KERN_INFO, "lkmasg1: failed to read.\n");
+		printk(KERN_INFO "lkmasg1: failed to read.\n");
 		return -EFAULT;
 	}
 	return 0;
