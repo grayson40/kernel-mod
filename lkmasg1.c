@@ -23,7 +23,7 @@ MODULE_VERSION("0.1");						 ///< A version number to inform users
  * Important variables that store data and keep track of relevant information.
  */
 static int major_number;
-static char message[256] = {};
+static char message[1024] = {};
 static short sizeOfMessage;
 static int numberOpens = 0;
 
