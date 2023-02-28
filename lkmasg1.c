@@ -13,6 +13,7 @@
 #include <linux/uaccess.h>	  // User access copy function support.
 #define DEVICE_NAME "lkmasg1" // Device name.
 #define CLASS_NAME "char"	  ///< The device class -- this is a character device driver
+#define MSG_SIZE 1024
 
 MODULE_LICENSE("GPL");						 ///< The license type -- this affects available functionality
 MODULE_AUTHOR("John Aedo");					 ///< The author -- visible when you use modinfo
@@ -23,7 +24,7 @@ MODULE_VERSION("0.1");						 ///< A version number to inform users
  * Important variables that store data and keep track of relevant information.
  */
 static int major_number;
-static char message[1024] = {};
+static char message[MSG_SIZE] = {};
 static short sizeOfMessage;
 static int numberOpens = 0;
 
@@ -153,9 +154,18 @@ static ssize_t read(struct file *filep, char *buffer, size_t len, loff_t *offset
  */
 static ssize_t write(struct file *filep, const char *buffer, size_t len, loff_t *offset)
 {
-	sprintf(message, "%s", buffer);
-	sizeOfMessage = strlen(message);
+    int error = 0;
+    if (len > MSG_SIZE)
+    {
+        error = copy_to_user(message, buffer, MSG_SIZE);
+        sizeOfMessage = MSG_SIZE;
+    }
+    else
+    {
+	    sprintf(message, "%s", buffer);
+	    sizeOfMessage = strlen(message);
+    }
 	printk(KERN_INFO "lkmasg1: writing: [%s]", message);
-	return len;
+	return sizeOfMessage;
 }
 
