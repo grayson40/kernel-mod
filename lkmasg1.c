@@ -2,6 +2,7 @@
  * File:	lkmasg1.c
  * Adapted for Linux 5.15 by: John Aedo
  * Class:	COP4600-SP23
+ * Group members: Sam Durkee, Grayson Crozier, and Chance Rupnow
  */
 
 #include <linux/init.h>
